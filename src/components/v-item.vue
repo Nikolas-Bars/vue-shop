@@ -9,7 +9,7 @@
         <p class="catalog_item_price">Цена: {{Math.round(product.price) }}</p>
         <button
                 class="catalog_item_add_to_cart_btn"
-                @click="sendDataToParent">
+                @click="addToCart">
             Купить
         </button>
     </div>
@@ -32,8 +32,8 @@
         },
         computed: {},
         methods: {
-            sendDataToParent() {
-                this.$emit('sendArticle', this.product.article)
+            addToCart() {
+                this.$emit('addToCart', this.product)
             }
         },
         watch: {}
