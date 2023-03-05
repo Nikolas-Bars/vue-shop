@@ -2,17 +2,18 @@
     <div class="v-cart">
         <h1>Корзина</h1>
         <v-cart-item
-                v-for="item in cart_data"
+                v-for="(item, index) in cart_data"
                 :cart_item_data="item"
                 :key="item.article"
+                @deleteFromCart="deleteFromCart(index)"
         />
     </div>
 </template>
 
 
 <script>
-import { mapGetters } from 'vuex'
-import VCartItem from "@/components/v-cart-item";
+    import {mapActions, mapGetters} from 'vuex'
+    import VCartItem from "@/components/v-cart-item";
     export default {
         name: "v-cart.vue",
         components: {
@@ -35,7 +36,14 @@ import VCartItem from "@/components/v-cart-item";
             ...mapGetters(['CART']),
 
         },
-        methods: {},
+        methods: {
+            ...mapActions([
+                'REMOVE_FROM_CART'
+            ]),
+            deleteFromCart(index) {
+                this.REMOVE_FROM_CART(index)
+            }
+        },
         watch: {},
         mounted() {
             console.log(this.CART)

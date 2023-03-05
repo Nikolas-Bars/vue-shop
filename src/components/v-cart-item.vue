@@ -1,6 +1,6 @@
 <template>
     <div class="v-cart-item">
-        <img
+        <img class="v-cart-item__image"
                 :src="require('../assets/images/' + cart_item_data.image)"
                 alt=""
         >
@@ -9,8 +9,10 @@
             <p>{{ cart_item_data.price }}</p>
             <p>{{ cart_item_data.article }}</p>
         </div>
-        <div class="v-cart-item__quantity"></div>
-        <button>Удалить</button>
+        <div class="v-cart-item__quantity">
+            <p>Количество</p>
+            {{ cart_item_data.quantity }}</div>
+        <button @click="deleteFromCart">Удалить</button>
     </div>
 </template>
 
@@ -24,16 +26,32 @@ export default {
                 return {}
             }
         }
+    },
+    computed: {
+        // cartItemArray() {
+        //     const array = { ...this.cart_item_data, quantity: 1 }
+        //     return array
+        // }
+    },
+    mounted() {
+
+    },
+    methods: {
+        deleteFromCart() {
+            this.$emit('deleteFromCart')
+        }
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .v-cart-item {
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
-
+    &__image {
+        max-width: 50px;
+    }
     }
 </style>

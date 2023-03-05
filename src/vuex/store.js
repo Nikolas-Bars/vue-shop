@@ -11,7 +11,16 @@ let store = createStore({
             state.products = products
         },
         SET_CART: (state, product) => {
-            state.cart.push(product)
+            if (state.cart.length) {
+                const existingProduct = state.cart.find((el) => el.article === product.article)
+                existingProduct ? existingProduct.quantity++ : state.cart.push(product)
+            }else {
+              state.cart.push(product)
+            }
+
+        },
+        REMOVE_FROM_CART: (state, index) => {
+            state.cart.splice(index, 1)
         }
     },
     actions: {
@@ -28,6 +37,9 @@ let store = createStore({
         },
         ADD_TO_CART({commit}, product) {
             commit('SET_CART', product)
+        },
+        REMOVE_FROM_CART({commit}, index) {
+            commit('REMOVE_FROM_CART', index)
         }
     },
     getters: {
