@@ -6,7 +6,7 @@
         >
         <div class="v-cart-item__info">
             <p>{{ cart_item_data.name }}</p>
-            <p>{{ cart_item_data.price }}</p>
+            <p>{{ Math.round(cart_item_data.price) }}</p>
             <p>{{ cart_item_data.article }}</p>
         </div>
         <div class="v-cart-item__quantity">
@@ -48,6 +48,9 @@ export default {
     .v-cart-item {
         display: flex;
         flex-wrap: nowrap;
+        box-shadow: 0 0 8px 0 #e0e0e0;
+        padding: $padding * 2;
+        margin-bottom: $margin * 2;
         justify-content: space-between;
         align-items: center;
     &__image {

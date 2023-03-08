@@ -8,11 +8,14 @@ export default createRouter({
     routes: [
         {
             path: '/',
+            name: 'catalog',
             component: vCatalog
         },
         {
             path: '/cart',
-            component: vCart
+            name: 'cart',
+            component: vCart,
+            props: true
         }
     ]
 })
