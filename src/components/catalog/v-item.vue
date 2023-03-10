@@ -2,7 +2,7 @@
     <div class="catalog_item">
         <img
                 class="catalog_item_image"
-                :src="require('../assets/images/' + product.image)"
+                :src="require('../../assets/images/' + product.image)"
                 alt="img"
         />
         <p class="catalog_item_name">{{product.name}}</p>
@@ -46,6 +46,7 @@
         box-shadow: 0 0 8px 0 #e0e0e0;
         padding: $padding * 2;
         margin-bottom: $margin * 2;
+        margin-right: 10px;
         &_image {
             width: 100px;
         }

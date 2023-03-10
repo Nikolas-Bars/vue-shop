@@ -3,10 +3,15 @@
         <div class="v-catalog__link_to_cart">В корзине: {{ CART.length }}</div>
     </router-link>
     <div class="v-catalog">
+        <v-select
+                :selected="selected"
+                :options="categories"
+                @select="sortByCategories"
+        />
         <h1>Каталог</h1>
         <div class="v-catalog__list">
             <v-item
-                    v-for="product in PRODUCT"
+                    v-for="product in filteredOptions"
                     :key="product.article"
                     :product="product"
                     @addToCart="addToCart"
@@ -19,21 +24,41 @@
 
     import VItem from "./v-item"
     import {mapActions, mapGetters} from 'vuex'
+    import VSelect from '../v-select'
 
     export default {
         name: 'v-catalog',
         components: {
-            VItem
+            VItem,
+            VSelect
         },
         props: {},
         data() {
-            return {}
+            return {
+                selected: {},
+                categories: [
+                    {name: 'Мужские', value: 1},
+                    {name: 'Все', value: 3},
+                    {name: 'Женские', value: 2}
+                ],
+                sortedProducts: []
+            }
         },
         computed: {
             ...mapGetters([
                 'PRODUCT',
                 'CART'
-            ])
+            ]),
+            filteredOptions() {
+                if(this.sortedProducts.length) {
+                    return this.sortedProducts
+                } else {
+                  return this.PRODUCT
+                }
+            }
+        },
+        created() {
+            this.sortedProducts = this.PRODUCT
         },
         methods: {
             ...mapActions([
@@ -41,6 +66,16 @@
                 'ADD_TO_CART'
 
             ]),
+            sortByCategories(option) {
+                if(option.value === 1) {
+                    this.sortedProducts = this.PRODUCT.filter((prod) => prod.category === 'Мужские')
+                } else if(option.value === 2) {
+                    this.sortedProducts = this.PRODUCT.filter((prod) => prod.category === 'Женские')
+                } else {
+                    this.sortedProducts = this.PRODUCT
+                }
+                this.selected = option
+            },
             addToCart(data) {
                 this.ADD_TO_CART(data)
             },
@@ -61,7 +96,7 @@
         &__list {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
         &__link_to_cart {
