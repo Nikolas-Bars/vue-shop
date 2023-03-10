@@ -11,12 +11,17 @@
         </div>
         <div class="v-cart-item__quantity">
             <p>Количество</p>
-            {{ cart_item_data.quantity }}</div>
+            <button @click="deleteOneFromCart">-</button>
+            {{ cart_item_data.quantity }}
+            <button @click="addOne">+</button>
+        </div>
         <button @click="deleteFromCart">Удалить</button>
     </div>
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
     name: "v-cart-item",
     props: {
@@ -27,18 +32,20 @@ export default {
             }
         }
     },
-    computed: {
-        // cartItemArray() {
-        //     const array = { ...this.cart_item_data, quantity: 1 }
-        //     return array
-        // }
-    },
+    computed: {},
     mounted() {
 
     },
     methods: {
+        ...mapActions(['ADD_TO_CART', 'REMOVE_ONE_PRODUCT']),
         deleteFromCart() {
             this.$emit('deleteFromCart')
+        },
+        deleteOneFromCart() {
+            this.REMOVE_ONE_PRODUCT(this.cart_item_data.article)
+        },
+        addOne() {
+            this.ADD_TO_CART(this.cart_item_data)
         }
     }
 }

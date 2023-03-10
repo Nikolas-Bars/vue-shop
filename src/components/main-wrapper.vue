@@ -8,15 +8,10 @@
 </template>
 
 <script>
-    // import VCatalog from "@/components/v-catalog";
-    // import vCart from './v-cart';
     import { mapGetters } from 'vuex';
     export default {
         name: "main-wrapper",
-        components: {
-            // VCatalog,
-            // vCart
-        },
+        components: {},
         props: {},
         data() {
             return {

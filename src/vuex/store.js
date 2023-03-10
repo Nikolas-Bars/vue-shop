@@ -21,6 +21,12 @@ let store = createStore({
         },
         REMOVE_FROM_CART: (state, index) => {
             state.cart.splice(index, 1)
+        },
+        REMOVE_ONE_PRODUCT: (state, article) => {
+            let product = state.cart.find((el) => el.article === article)
+            if(product.quantity > 1) {
+                product.quantity--
+            }
         }
     },
     actions: {
@@ -40,6 +46,9 @@ let store = createStore({
         },
         REMOVE_FROM_CART({commit}, index) {
             commit('REMOVE_FROM_CART', index)
+        },
+        REMOVE_ONE_PRODUCT({commit}, article) {
+            commit('REMOVE_ONE_PRODUCT', article)
         }
     },
     getters: {

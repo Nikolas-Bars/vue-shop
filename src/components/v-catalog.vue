@@ -43,7 +43,6 @@
             ]),
             addToCart(data) {
                 this.ADD_TO_CART(data)
-                console.log(this.CART, 'thisthisthis.SET_CART')
             },
             goToCart() {
 
