@@ -79,12 +79,15 @@
     }
     .title {
         border: 1px solid #aaaaaa;
+        width: 100%;
     }
     .options {
         border: 1px solid #aaaaaa;
+        border-top: none;
         position: absolute;
-        top: 22px;
+        top: 20px;
         right: 0;
+        left: 0;
         width: 100%
     }
     .options p:hover {

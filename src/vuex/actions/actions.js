@@ -25,7 +25,6 @@ export default {
         commit('SWITCH_MOBILE', value)
     },
     SET_DESKTOP({commit}, value) {
-        console.log('SET_DESKTOP')
         commit('SWITCH_DESKTOP', value)
     },
 }

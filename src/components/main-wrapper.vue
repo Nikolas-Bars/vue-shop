@@ -23,9 +23,7 @@
         },
         methods: {},
         watch: {},
-        mounted() {
-            console.log('бу')
-        }
+        mounted() {}
     }
 </script>
 
