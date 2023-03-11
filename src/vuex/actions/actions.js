@@ -20,5 +20,12 @@ export default {
     },
     REMOVE_ONE_PRODUCT({commit}, article) {
         commit('REMOVE_ONE_PRODUCT', article)
-    }
+    },
+    SET_MOBILE({commit}, value) {
+        commit('SWITCH_MOBILE', value)
+    },
+    SET_DESKTOP({commit}, value) {
+        console.log('SET_DESKTOP')
+        commit('SWITCH_DESKTOP', value)
+    },
 }

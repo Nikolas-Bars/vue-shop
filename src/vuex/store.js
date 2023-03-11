@@ -5,6 +5,8 @@ import getters from './getters/getters'
 
 let store = createStore({
     state: {
+        isMobile: false,
+        isDesktop: true,
         products: [],
         cart: []
     },

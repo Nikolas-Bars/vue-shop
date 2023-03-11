@@ -6,7 +6,9 @@
         <v-select
                 :selected="selected"
                 :options="categories"
+                :is-expanded="IS_MOBILE"
                 @select="sortByCategories"
+                @switchExpanded="switchExpanded"
         />
         <h1>Каталог</h1>
         <div class="v-catalog__list">
@@ -47,7 +49,9 @@
         computed: {
             ...mapGetters([
                 'PRODUCT',
-                'CART'
+                'CART',
+                'IS_MOBILE',
+                'IS_DESKTOP'
             ]),
             filteredOptions() {
                 if(this.sortedProducts.length) {
@@ -63,9 +67,12 @@
         methods: {
             ...mapActions([
                 'GET_PRODUCTS_FROM_API',
-                'ADD_TO_CART'
-
+                'ADD_TO_CART',
+                'SET_MOBILE'
             ]),
+            switchExpanded() {
+                this.SET_MOBILE()
+            },
             sortByCategories(option) {
                 if(option.value === 1) {
                     this.sortedProducts = this.PRODUCT.filter((prod) => prod.category === 'Мужские')
@@ -78,9 +85,6 @@
             },
             addToCart(data) {
                 this.ADD_TO_CART(data)
-            },
-            goToCart() {
-
             }
         },
         mounted() {

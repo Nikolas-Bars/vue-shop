@@ -2,7 +2,7 @@
     <div class="v-select">
         <p class="title" @click="showOptions">{{selected.name ? selected.name : 'Все'}}</p>
         <div
-                v-if="areOptionsVisible"
+                v-if="areOptionsVisible || isExpanded"
                 class="options">
             <p
                     v-for="option in options"
@@ -16,9 +16,16 @@
 </template>
 
 <script>
+
     export default {
         name: "v-select",
         props: {
+            isExpanded: {
+              type: Boolean,
+              default() {
+                  return false
+              }
+            },
             options: {
                 type: Array,
                 default() {
@@ -40,10 +47,11 @@
         },
         methods: {
             showOptions() {
-                this.areOptionsVisible = true
+                this.areOptionsVisible = !this.areOptionsVisible
             },
             hideOptions() {
                 this.areOptionsVisible = false
+                this.$emit('switchExpanded', false)
             },
             selectOption(option) {
                 this.$emit('select', option)
@@ -51,7 +59,11 @@
             }
         },
         mounted() {
+            // закроем при клике за пределами селекта
             document.addEventListener('click', this.hideOptions.bind(this), true)
+        },
+        beforeUnmount() {
+            document.removeEventListener('click', this.hideOptions)
         }
     }
 </script>
